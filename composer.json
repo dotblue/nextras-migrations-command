@@ -26,7 +26,8 @@
     },
     "require": {
         "php": ">=5.4",
-        "nextras/migrations": "~2.1.0"
+        "nextras/migrations": "~2.1.0",
+        "symfony/console": "~2.4"
     },
     "suggest": {
         "kdyby/console": "Command will be automatically registered into the app"
