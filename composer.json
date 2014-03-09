@@ -26,8 +26,10 @@
     },
     "require": {
         "php": ">=5.4",
-        "nextras/migrations": "~2.1.0",
-        "kdyby/console": "~2.0.0"
+        "nextras/migrations": "~2.1.0"
+    },
+    "suggest": {
+        "kdyby/console": "Command will be automatically registered into the app"
     },
     "autoload": {
         "classmap": ["src/"]

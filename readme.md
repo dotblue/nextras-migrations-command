@@ -5,7 +5,7 @@
 
 - PHP 5.4+
 - [nextras/migrations](https://github.com/nextras/migrations) >= 2.1
-- [kdyby/console](https://github.com/Kdyby/Console) >= 2.0
+- [kdyby/console](https://github.com/Kdyby/Console) >= 2.0 (optional)
 
 ## Installation
 
@@ -26,3 +26,7 @@ migrations:
 	groups:
 		structures: %appDir%/../sql
 ```
+
+## `symfony/console` or `kdyby/console`?
+
+You can use this extension with plain Symfony Console. But if you use Kdyby Console, command will get registered automatically.
