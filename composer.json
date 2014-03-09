@@ -1,0 +1,35 @@
+{
+    "name": "dotblue/nextras-migrations-command",
+    "description": "Easy setup for nextras/migrations with kdyby/console",
+    "type": "library",
+    "keywords": [
+        "nextras",
+        "migrations",
+        "sql",
+        "console",
+        "nette"
+    ],
+    "license": ["BSD-3-Clause"],
+    "authors": [
+        {
+            "name": "Vojtěch Dobeš",
+            "homepage": "http://github.com/vojtech-dobes"
+        },
+        {
+            "name": "dotBlue",
+            "homepage": "http://dotblue.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/dotblue/nextras-migrations-command/issues",
+        "source": "https://github.com/dotblue/nextras-migrations-command"
+    },
+    "require": {
+        "php": ">=5.4",
+        "nextras/migrations": "~2.1.0",
+        "kdyby/console": "~2.0.0"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}
