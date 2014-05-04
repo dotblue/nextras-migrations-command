@@ -9,18 +9,18 @@
 
 ## Installation
 
-1.  Copy source codes from Github or using [Composer](http://getcomposer.org/):
+1) Copy source codes from Github or using [Composer](http://getcomposer.org/):
 ```sh
 $ composer require dotblue/nextras-migrations-command@~1.0
 ```
 
-2.  Register as Configurator's extension:
+2) Register as Configurator's extension:
 ```
 extensions:
 	migrations: DotBlue\Migrations\MigrationsExtension
 ```
 
-3.  Set configuration to fit your app:
+3) Set configuration to fit your app:
 ```
 migrations:
 	groups:
