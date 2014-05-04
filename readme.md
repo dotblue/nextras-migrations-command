@@ -27,6 +27,15 @@ migrations:
 		structures: %appDir%/../sql
 ```
 
+4) By default, migrations use Nette\Database to connect to DB.
+```
+nette:
+	database:
+		dsn:
+		user:
+		password:
+```
+
 ## `symfony/console` or `kdyby/console`?
 
 You can use this extension with plain Symfony Console. But if you use Kdyby Console, command will get registered automatically.
