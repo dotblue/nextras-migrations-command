@@ -27,6 +27,7 @@ class MigrationsCommand extends Console\Command\Command
     public function configure()
     {
         $this->setName('migrate');
+        $this->setDescription('Runs database migrations');
         $this->addArgument('names', InputArgument::IS_ARRAY);
         $this->addOption('reset', NULL, InputOption::VALUE_NONE);
         $this->addOption('init-sql', NULL, InputOption::VALUE_NONE);
