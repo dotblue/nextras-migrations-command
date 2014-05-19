@@ -23,6 +23,8 @@ extensions:
 3) Set configuration to fit your app:
 ```
 migrations:
+	extensions:
+		sql: Nextras\Migrations\Extensions\NetteDbSql
 	groups:
 		structures: %appDir%/../sql
 ```

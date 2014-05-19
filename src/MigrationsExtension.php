@@ -16,6 +16,7 @@ class MigrationsExtension extends DI\CompilerExtension
 	private $defaults = [
 		'table' => 'migrations',
 		'groups' => [],
+		'extensions' => [],
 	];
 
 
@@ -30,12 +31,21 @@ class MigrationsExtension extends DI\CompilerExtension
 				'tableName' => $config['table'],
 			]);
 
-		$container->addDefinition($this->prefix('extension'))
-			->setClass('Nextras\Migrations\Extensions\NetteDbSql');
-
 		$controller = $container->addDefinition($this->prefix('controller'))
-			->setClass('Nextras\Migrations\Controllers\ConsoleController')
-			->addSetup('addExtension', ['sql']);
+			->setClass('Nextras\Migrations\Controllers\ConsoleController');
+
+		foreach ($config['extensions'] as $extension => $implementation) {
+			$this->compiler->parseServices($container, [
+				'services' => [
+					$this->prefix('extension_' . $extension) => $implementation,
+				],
+			]);
+
+			$controller->addSetup('addExtension', [
+				$extension,
+				$this->prefix('@extension_' . $extension),
+			]);
+		}
 
 		$container->addDefinition($this->prefix('command'))
 			->setClass('DotBlue\Migrations\MigrationsCommand')
