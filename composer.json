@@ -30,7 +30,8 @@
         "symfony/console": "~2.4"
     },
     "suggest": {
-        "kdyby/console": "Command will be automatically registered into the app"
+        "kdyby/console": "Command will be automatically registered into the app",
+        "kdyby/events": "Command will trigger events on success and fail"
     },
     "autoload": {
         "classmap": ["src/"]

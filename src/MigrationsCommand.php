@@ -6,6 +6,8 @@
 
 namespace DotBlue\Migrations;
 
+use Exception;
+use Kdyby\Events\EventManager;
 use Nextras\Migrations\Controllers\ConsoleController;
 use Symfony\Component\Console;
 use Symfony\Component\Console\Input\InputArgument;
@@ -20,11 +22,20 @@ class MigrationsCommand extends Console\Command\Command
     /** @var ConsoleController */
     private $controller;
 
+    /** @var EventManager|NULL */
+    private $eventManager;
+
 
     public function __construct(ConsoleController $controller)
     {
         $this->controller = $controller;
         parent::__construct();
+    }
+
+
+    public function setEventManager(EventManager $eventManager)
+    {
+        $this->eventManager = $eventManager;
     }
 
 
@@ -43,7 +54,23 @@ class MigrationsCommand extends Console\Command\Command
         array_shift($_SERVER['argv']);
 
         // run controller
-        $this->controller->run();
+        try {
+            $this->controller->run();
+            $this->fireEvent('nextras.migrations.success');
+            $this->fireEvent('nextras.migrations.complete');
+        } catch (Exception $e) {
+            $this->fireEvent('nextras.migrations.fail');
+            $this->fireEvent('nextras.migrations.complete');
+            throw $e;
+        }
+    }
+
+
+    private function fireEvent($name)
+    {
+        if ($this->eventManager) {
+            $this->eventManager->dispatchEvent($name);
+        }
     }
 
 }

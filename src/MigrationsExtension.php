@@ -7,6 +7,7 @@
 namespace DotBlue\Migrations;
 
 use Nette\DI;
+use Nette\PhpGenerator as Code;
 
 
 class MigrationsExtension extends DI\CompilerExtension
@@ -58,6 +59,27 @@ class MigrationsExtension extends DI\CompilerExtension
 				$path,
 				isset($group['deps']) ? $group['deps'] : [],
 			]);
+		}
+	}
+
+
+
+	public function afterCompile(Code\ClassType $class)
+	{
+		$container = $this->getContainerBuilder();
+
+		if ($eventManager = $container->getByType('Kdyby\Events\EventManager')) {
+			$methodName = 'createService' . ucfirst($this->name) . '__command';
+			$method = $class->methods[$methodName];
+
+			$body = explode(';', substr(trim($method->getBody()), 0, -1));
+			$return = array_pop($body);
+			$body[] = Code\Helpers::format(
+				PHP_EOL . '$service->setEventManager($this->getService(?))',
+				$eventManager
+			);
+			$body[] = $return;
+			$method->setBody(implode(';', $body) . ';');
 		}
 	}
 

@@ -6,6 +6,7 @@
 - PHP 5.4+
 - [nextras/migrations](https://github.com/nextras/migrations) >= 2.1
 - [kdyby/console](https://github.com/Kdyby/Console) >= 2.0 (optional)
+- [kdyby/events](https://github.com/Kdyby/Events) >= 2.0 (optional)
 
 ## Installation
 
@@ -41,3 +42,11 @@ nette:
 ## `symfony/console` or `kdyby/console`?
 
 You can use this extension with plain Symfony Console. But if you use Kdyby Console, command will get registered automatically.
+
+## `kdyby/events` ?
+
+if you use `kdyby/events`, you can listen to following events:
+
+- `nextras.migrations.success` (when migrations finish successfully)
+- `nextras.migrations.fail` (when migrations finish with exception)
+- `nextras.migrations.complete` (when migrations finish regardless outcome)
