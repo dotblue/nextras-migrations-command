@@ -60,6 +60,10 @@ class MigrationsExtension extends DI\CompilerExtension
 				isset($group['deps']) ? $group['deps'] : [],
 			]);
 		}
+
+		$container->addDefinition($this->prefix('unlockCommand'))
+			->setClass('DotBlue\Migrations\UnlockCommand')
+			->addTag('kdyby.console.command');
 	}
 
 
