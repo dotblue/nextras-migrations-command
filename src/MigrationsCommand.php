@@ -10,6 +10,7 @@ use Exception;
 use Kdyby\Events\EventManager;
 use Nextras\Migrations\Controllers\ConsoleController;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
@@ -73,6 +74,11 @@ class MigrationsCommand extends Command
             $this->controller->run();
             $this->fireEvent('nextras.migrations.success');
             $this->fireEvent('nextras.migrations.complete');
+
+            $this->getApplication()->find('migrate:unlock')
+                ->run(new ArrayInput([
+                    'command' => 'migrate:unlock',
+                ]), $output);
         } catch (Exception $e) {
             $this->fireEvent('nextras.migrations.fail');
             $this->fireEvent('nextras.migrations.complete');

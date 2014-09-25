@@ -6,7 +6,7 @@
 
 namespace DotBlue\Migrations;
 
-use Nette\Database;
+use Nextras;
 use Symfony\Component\Console;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -15,13 +15,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 class UnlockCommand extends Console\Command\Command
 {
 
-    /** @var Database\Context */
-    private $database;
+    /** @var Nextras\Migrations\IDriver */
+    private $driver;
 
 
-    public function __construct(Database\Context $database)
+    public function __construct(Nextras\Migrations\IDriver $driver)
     {
-        $this->database = $database;
+        $this->driver = $driver;
         parent::__construct();
     }
 
@@ -35,7 +35,7 @@ class UnlockCommand extends Console\Command\Command
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->database->query('DROP TABLE IF EXISTS `migrations_lock`');
+        $this->driver->unlock();
         $output->writeln('<info>Migrations unlocked.</info>');
     }
 
