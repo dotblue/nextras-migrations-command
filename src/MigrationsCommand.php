@@ -51,7 +51,22 @@ class MigrationsCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        array_shift($_SERVER['argv']);
+        $originalCliArgs = $_SERVER['argv'];
+
+        $_SERVER['argv'] = [
+            'migrations', // this item isn't used by ConsoleController
+        ];
+
+        if ($input->getOption('init-sql')) {
+            $_SERVER['argv'][] = '--init-sql';
+        }
+        if ($input->getOption('reset')) {
+            $_SERVER['argv'][] = '--reset';
+        }
+
+        foreach ($input->getArgument('names') as $name) {
+            $_SERVER['argv'][] = $name;
+        }
 
         // run controller
         try {
@@ -63,6 +78,8 @@ class MigrationsCommand extends Command
             $this->fireEvent('nextras.migrations.complete');
             throw $e;
         }
+
+        $_SERVER['argv'] = $originalCliArgs;
     }
 
 
