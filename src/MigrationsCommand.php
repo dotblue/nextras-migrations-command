@@ -9,14 +9,14 @@ namespace DotBlue\Migrations;
 use Exception;
 use Kdyby\Events\EventManager;
 use Nextras\Migrations\Controllers\ConsoleController;
-use Symfony\Component\Console;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class MigrationsCommand extends Console\Command\Command
+class MigrationsCommand extends Command
 {
 
     /** @var ConsoleController */
